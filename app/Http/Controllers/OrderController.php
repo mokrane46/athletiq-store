@@ -20,9 +20,28 @@ class OrderController extends Controller
             if (empty($sessionCart)) {
                 return redirect()->route('cart.show')->with('error', 'Your cart is empty');
             }
-            $products = \App\Models\Product::whereIn('Product_ID', array_keys($sessionCart))->get();
-            foreach ($products as $product) {
-                $product->setRelation('pivot', (object)['Product_quantity' => $sessionCart[$product->Product_ID]]);
+            $productIds = collect($sessionCart)->map(function ($item, $key) {
+                return is_array($item) ? $item['product_id'] : $key;
+            })->unique()->toArray();
+            
+            $productsData = \App\Models\Product::whereIn('Product_ID', $productIds)->get()->keyBy('Product_ID');
+            $products = collect();
+            
+            foreach ($sessionCart as $key => $item) {
+                $productId = is_array($item) ? $item['product_id'] : $key;
+                $quantity = is_array($item) ? $item['quantity'] : $item;
+                $color = is_array($item) ? ($item['color'] ?? 'none') : 'none';
+                $size = is_array($item) ? ($item['size'] ?? 'none') : 'none';
+                
+                if (isset($productsData[$productId])) {
+                    $product = clone $productsData[$productId];
+                    $product->setRelation('pivot', (object)[
+                        'Product_quantity' => $quantity,
+                        'color' => $color,
+                        'size' => $size
+                    ]);
+                    $products->push($product);
+                }
             }
             $cart = (object)['products' => $products];
         }
@@ -53,10 +72,18 @@ class OrderController extends Controller
             if (empty($sessionCart)) {
                 return back()->with('error', 'Your cart is empty');
             }
-            $products = \App\Models\Product::whereIn('Product_ID', array_keys($sessionCart))->get();
             $cart = Cart::create(['Customer_ID' => null]);
-            foreach ($sessionCart as $productId => $quantity) {
-                $cart->products()->attach($productId, ['Product_quantity' => $quantity]);
+            foreach ($sessionCart as $key => $item) {
+                $productId = is_array($item) ? $item['product_id'] : $key;
+                $quantity = is_array($item) ? $item['quantity'] : $item;
+                $color = is_array($item) ? ($item['color'] ?? 'none') : 'none';
+                $size = is_array($item) ? ($item['size'] ?? 'none') : 'none';
+                
+                $cart->products()->attach($productId, [
+                    'Product_quantity' => $quantity,
+                    'color' => $color,
+                    'size' => $size
+                ]);
             }
             $products = $cart->products;
         }
