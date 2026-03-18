@@ -1,0 +1,497 @@
+/* ================================================================
+   ATHLETIQ — COMMON STYLES
+   Shared design system for all sub-pages
+   ================================================================ */
+
+:root {
+    --accent: #32FF7E;
+    --accent-dark: #22cc62;
+    --bg-color: #ffffff;
+    --bg-secondary: #f7f7f7;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --text-muted: #999999;
+    --radius-md: 16px;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode {
+    --bg-color: #111111;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #aaaaaa;
+}
+
+/* ── Container ────────────────────────────────────────────── */
+.premium-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px 80px;
+}
+
+/* ── Section Headers ───────────────────────────────────────── */
+.premium-page-header {
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.premium-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    display: block;
+}
+
+.premium-title {
+    font-family: 'Sakana', 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.premium-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .premium-card {
+    border-color: rgba(255, 255, 255, 0.05);
+    background: #1a1a1a;
+}
+
+.premium-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.premium-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #111;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.premium-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(50, 255, 126, 0.3);
+}
+
+.premium-btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--text-primary);
+}
+
+.premium-btn-outline:hover {
+    background: var(--accent);
+    color: #111;
+}
+
+/* ── Forms ─────────────────────────────────────────────────── */
+.premium-form-group {
+    margin-bottom: 20px;
+}
+
+.premium-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.premium-input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--bg-color);
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+body.dark-mode .premium-input {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.premium-input:focus {
+    border-color: var(--accent);
+}
+
+/* ================================================================
+   GLOBAL PRODUCT CARDS
+   ================================================================ */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.product-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark-mode .product-card {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-img-wrapper {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: #eee;
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-info h3 {
+    font-family: 'Sakana', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.product-price {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 1.2rem;
+    margin-top: auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.product-actions {
+    margin-top: auto;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 12px;
+}
+
+/* Hover Actions */
+.product-actions-hover {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: var(--card-bg);
+    display: flex;
+    gap: 10px;
+    transition: bottom 0.3s ease;
+    z-index: 10;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .product-actions-hover {
+    background: var(--bg-secondary);
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.product-card:hover .product-actions-hover {
+    bottom: 0;
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--text-primary);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .btn-icon:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-full {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #111;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    padding: 0 15px;
+}
+
+.btn-full:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 700px) {
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .product-card {
+        padding: 12px;
+    }
+
+    .product-info h3 {
+        font-size: 0.95rem;
+    }
+
+    /* Always show actions on mobile */
+    .product-actions-hover {
+        position: static;
+        background: transparent;
+        padding: 10px 0 0;
+        border-top: none;
+    }
+
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+
+    .btn-full {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+}
+
+/* ================================================================
+   USER PROFILE DROPDOWN
+   ================================================================ */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: -10px;
+    width: 240px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+body.dark-mode .profile-menu {
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.profile-dropdown:hover .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .profile-header {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.profile-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.profile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.profile-link:hover {
+    color: var(--accent-dark);
+}
+
+.profile-logout-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #ff3e3e;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+body.dark-mode .profile-logout-btn {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-logout-btn:hover {
+    background: #ff3e3e;
+    color: #fff;
+    border-color: #ff3e3e;
+}
+
+/* ================================================================
+   PREMIUM NOTIFICATION BADGES (CART & WISHLIST)
+   ================================================================ */
+/* ================================================================
+   FIXED NAV BADGES (IDENTICAL TO HOME PAGE)
+   ================================================================ */
+.cart-count-badge {
+    position: absolute !important;
+
+    /* 1. The Offset: Push it higher and further right */
+    top: -8px !important;
+    right: -10px !important;
+
+    /* 2. The Size: 16px is the premium standard to avoid covering icons */
+    min-width: 17px !important;
+    height: 17px !important;
+    padding: 0 !important;
+
+    /* 3. The Look: Black background, white text, and a sharp white border */
+    background: #d10b0b !important;
+    color: #fff !important;
+    border: 1.5px solid #fff !important;
+    border-radius: 50% !important;
+
+    /* 4. Centering and Typography */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 9px !important;
+    font-weight: 900 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    z-index: 10 !important;
+    pointer-events: none;
+    /* Prevents badge from interfering with clicks */
+
+    animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Dark Mode: Use neon green border for high contrast */
+body.dark-mode .cart-count-badge {
+    background: #5c0303 !important;
+    color: var(--accent) !important;
+    border-color: #1c1c1c !important;
+}
+
+body.dark-mode .cart-count-badge {
+    background: var(--accent);
+    /* Uses your neon green in dark mode */
+    color: #111;
+    border-color: #1a1a1a;
+    /* Matches the dark navbar background */
+}
+
+/* Adds a nice little spring animation when the number appears */
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

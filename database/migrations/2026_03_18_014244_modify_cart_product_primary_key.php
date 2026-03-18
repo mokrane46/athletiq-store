@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('Cart_Product', function (Blueprint $table) {
+            $table->dropForeign(['Cart_ID']);
+            $table->dropForeign(['Product_ID']);
+            $table->dropPrimary();
+            $table->id()->first();
+            $table->foreign('Cart_ID')->references('Cart_ID')->on('Cart')->onDelete('cascade');
+            $table->foreign('Product_ID')->references('Product_ID')->on('Product');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('Cart_Product', function (Blueprint $table) {
+            $table->dropForeign(['Cart_ID']);
+            $table->dropForeign(['Product_ID']);
+            $table->dropColumn('id');
+            $table->primary(['Cart_ID', 'Product_ID']);
+            $table->foreign('Cart_ID')->references('Cart_ID')->on('Cart')->onDelete('cascade');
+            $table->foreign('Product_ID')->references('Product_ID')->on('Product');
+        });
+    }
+};

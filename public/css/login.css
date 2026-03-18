@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'Sakana';
+    src: url('../fonts/Sakana.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Root variables for light/dark mode */
+:root {
+    --bg-color: #ffffff;
+    --text-color1: #151515;
+    --text-color2: #555;
+    --accent: #32FF7E;
+    --input-bg: #efefef;
+    --input-border: rgba(255,255,255,0.15);
+}
+
+body.dark-mode {
+    --bg-color: #1c1c1c;
+    --text-color1: #fff;
+    --text-color2: #bbb;
+    --accent: #32FF7E;
+    --input-bg: #3e3e3e;
+    --input-border: rgba(255,255,255,0.3);
+}
+
+/* Base Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    background: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.35s, color 0.35s;
+}
+
+/* Default: login page hides scroll */
+body.login-page,
+body.login-page html {
+    overflow: hidden;
+}
+
+/* Allow scroll on register page */
+body.register-page,
+body.register-page html {
+    overflow: auto;
+}
+
+.theme-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent);
+    color: #111;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.theme-toggle i {
+    transition: transform 0.4s ease;
+}
+
+button.theme-toggle {
+    box-shadow: 0 0 20px rgba(50, 255, 126, 0.6);
+    transition: all 0.4s ease;
+}
+
+body.dark-mode .theme-toggle i {
+    transform: rotate(180deg);
+}
+
+button.theme-toggle:hover {
+    scale: 1.1;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;  /* stack items vertically */
+    align-items: center;     /* center horizontally */
+    justify-content: center; /* center vertically */
+    text-align: center;      /* center text inside */
+    height: 100%;            /* full height of container */
+    gap: 1.5rem;             /* spacing between elements */
+    padding: 3rem 3.5rem;
+    width: 100%;
+    max-width: 400px;
+    color: #fff;
+    box-sizing: border-box;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.login-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;           /* center button horizontally */
+    gap: 1rem;
+}
+
+/* Labels aligned left above inputs */
+.login-container form label {
+    width: 100%;
+    text-align: left;
+    font-weight: 400px;
+}
+
+
+.imgcontainer {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically if needed */
+    margin-bottom: 2rem;     /* space below the logo */
+}
+
+.avatar-dark{
+  display: none;
+}
+
+body.dark-mode .avatar-dark {
+  display: block;
+}
+
+body.dark-mode .avatar-light{
+  display: none;
+}
+
+.imgcontainer .avatar-light,
+.imgcontainer .avatar-dark {
+    width: 600px;            /* make the logo bigger */
+    max-width: 100%;          /* responsive: won't overflow on small screens */
+    height: auto;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.login-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-color1);
+}
+
+/* Normal focus */
+form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Chrome / Edge / Safari autofill */
+/* Base input */
+.login-container form input{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--input-bg);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    background-color: var(--input-bg);
+    color: var(--text-color2);
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: box-shadow 0.25s ease;
+    outline: none; /* remove default outline */
+}
+
+/* Normal focus */
+form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Chrome / Edge / Safari autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--text-color2) !important;
+    caret-color: var(--text-color2);
+    
+    /* Completely cover Chrome’s default autofill background & inner highlight */
+    -webkit-box-shadow: 0 0 0px 1000px var(--input-bg) inset !important;
+    box-shadow: 0 0 0px 1000px var(--input-bg) inset !important;
+    
+    border: 2px solid transparent !important; /* prevent outline change */
+    outline: none !important;                 /* remove highlight */
+    transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+/* Autofill + focus */
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-color2) !important;
+    caret-color: var(--text-color2);
+
+    -webkit-box-shadow:
+        0 0 0px 1000px var(--input-bg) inset, /* background */
+        0 0 0 2px var(--accent) !important;  /* focus ring */
+    box-shadow:
+        0 0 0px 1000px var(--input-bg) inset,
+        0 0 0 2px var(--accent) !important;
+
+    border: 2px solid transparent !important;
+    outline: none !important;
+}
+/* Submit button */
+form button {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    margin-top: 1.25rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--accent);
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+form button:hover {
+    background: #28cc63;
+    transform: scale(1.03);
+}
+
+.password-field{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  margin-top: 1.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.name-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 50px; /* space for eye icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text-color2);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+
+.toggle-password:hover {
+    color: var(--accent);
+}
+
+.login-links,
+.signup-link {
+  display: flex;                   /* align items in a row */
+  justify-content: center;  /* checkbox left, forgot right */
+  align-items: center;             /* vertically center both items */
+  width: 100%;                     /* full width of form */
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.login-links a,
+.signup-link a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;            /* prevent text from wrapping */
+}
+
+.login-links a:hover,
+.signup-link a:hover {
+  color: #28cc63;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;                        /* space between checkbox and text */
+  user-select: none;
+  white-space: nowrap;              /* prevent wrapping */
+}
+
+/* Hide the default checkbox */
+.remember-me input {
+  display: none;
+}
+
+/* Create a custom checkbox */
+.remember-me .checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333; /* border color */
+  border-radius: 4px; /* rounded corners */
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Checkbox hover effect */
+.checkmark:hover {
+  border-color: var(--text-color2);
+}
+
+/* Checkmark/indicator when checked */
+.remember-me input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--accent); /* check color */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+
+/* Align label text nicely */
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat' sans-serif;
+  user-select: none;
+}
+
+p,
+label {
+  color: var(--text-color1);
+}
+
+.cancel-container {
+    position: absolute;
+    top: 20px;      /* distance from top */
+    left: 20px;     /* distance from left */
+    z-index: 1000;  /* ensure it sits above other content */
+}
+
+/* Cancel button */
+.cancelbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 12px 10px;
+    border-radius: 20px;
+    color: var(--text-color1);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.cancelbtn:hover {
+    transform: scale(1.2);
+}
+
+/* Error box */
+.error-message {
+    background-color: rgba(239,68,68,0.15);
+    color: #fecaca;
+    border: 1px solid rgba(239,68,68,0.35);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(8px);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .login-container {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    .login-container h2 {
+        font-size: 1.75rem;
+    }
+}
