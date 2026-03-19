@@ -16,10 +16,10 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 // -------------------- AUTH ROUTES --------------------
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post')->middleware('throttle:5,1');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post')->middleware('throttle:10,1');
 Route::get('/registration-success', fn() => view('registration_success'))->name('registration_success');
 
 // -------------------- PUBLIC ROUTES --------------------
@@ -35,8 +35,8 @@ Route::get('/subcategory/{id}/search', [CategoryController::class, 'searchProduc
 Route::get('/gender/{gender}', [CategoryController::class, 'showByGender'])->name('category.gender');
 
 // Orders
-Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-Route::post('/orders/place', [OrderController::class, 'placeOrder'])->name('orders.place');
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::post('/orders/place', [OrderController::class, 'placeOrder'])->name('orders.place')->middleware('auth');
 
 // Cart (protected)
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
