@@ -22,9 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 1. Force HTTPS for ngrok / production
-        if (config('app.env') !== 'local' || str_contains(request()->url(), 'ngrok-free.app')) {
+        // 1. Auto-detect ngrok and fix asset URLs
+        $forwardedHost = request()->header('X-Forwarded-Host');
+        if ($forwardedHost && str_contains($forwardedHost, 'ngrok')) {
             URL::forceScheme('https');
+            URL::forceRootUrl('https://' . $forwardedHost);
         }
 
         // 2. Share categories with all views

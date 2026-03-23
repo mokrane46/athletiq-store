@@ -69,7 +69,7 @@
                     <a href="/cart" class="menu-btn" style="position:relative;">
                         <span class="bx bx-cart btn-text"></span>Cart
                         @php
-                            $globalCartCount = Auth::check() ? Auth::user()->cartItemCount() : array_sum(session()->get('cart', []));
+                            $globalCartCount = Auth::check() ? Auth::user()->cartItemCount() : collect(session()->get('cart', []))->sum('quantity');
                         @endphp
                         @if($globalCartCount > 0)
                             <span class="cart-count-badge" style="top: -5px; right: -5px;">{{ $globalCartCount }}</span>
@@ -102,7 +102,7 @@
             <a href="/cart" class="nav-icon-link cart-a" style="position:relative;">
                 <i class='bx bx-cart'></i>
                 @php
-                    $globalCartCount = Auth::check() ? Auth::user()->cartItemCount() : array_sum(session()->get('cart', []));
+                    $globalCartCount = Auth::check() ? Auth::user()->cartItemCount() : collect(session()->get('cart', []))->sum('quantity');
                 @endphp
                 @if($globalCartCount > 0)
                     <span class="cart-count-badge">{{ $globalCartCount }}</span>
@@ -307,10 +307,12 @@
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
-            const icons = { success: 'bx-check-circle', error: 'bx-error', info: 'bx-info-circle' };
+            const icons = { success: 'bx-check-circle', error: 'bx-error',
+                 info: 'bx-info-circle' };
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            toast.innerHTML = `<i class='bx ${icons[type] || icons.info}'></i><span>${message}</span>`;
+            toast.innerHTML = `<i class='bx ${icons[type] || icons.info}'></i>
+            <span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
                 toast.classList.add('removing');
